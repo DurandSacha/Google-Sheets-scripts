@@ -12,7 +12,7 @@ function scrapEmail(url) {
     }
     else{
       var htmlPart = textHTML.substr(0, 4999);
-      var mail0 = htmlPart.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[/fr|com|org|net|us|info|uk|be|pro|ca|gov|univ|edu/]+)/);
+      var mail0 = htmlPart.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[/fr|com|org|net|us|info/]+)/);
 
       if(mail0 != null){
         //console.log(mail0);
@@ -27,7 +27,7 @@ function scrapEmail(url) {
         htmlPart = htmlPart.replace('<', ' ');
         htmlPart = htmlPart.replace('<br/>', '');
         htmlPart = htmlPart.replace('nbsp', '');
-        var mail = htmlPart.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[/fr|com|org|net|us|info|uk|be|pro|ca|gov|univ|edu/]+)/);
+        var mail = htmlPart.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[/fr|com|org|net|us|info/]+)/);
         if(mail != null ){
           if (Array.isArray(mail) == true){
             console.log(mail[0]);
