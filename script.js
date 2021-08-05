@@ -1,3 +1,4 @@
+// scrap an email from url string
 function scrapEmail(url) {
   if(url === '' || url === undefined){
     return 'Pas de site Web visible';
@@ -40,6 +41,7 @@ function scrapEmail(url) {
   }
 }
 
+// scrap an phone number from url string
 function scrapPhone(url) {
   if(url === '' || url === undefined){
     return 'Pas de site Web visible';
