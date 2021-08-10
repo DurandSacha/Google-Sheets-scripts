@@ -8,4 +8,4 @@ a script functions for scraping with Google Sheets
 3. Add function for complete data
 4. For add line, use 'add at the end of sheet' function
 5. TODO: Send a mail with a script and SMTP API ?
-6. TODO : hosting this script in API on api.sachadurand.fr
+6. TODO : integrate this script on api.sachadurand.fr (in api parts) 
