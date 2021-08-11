@@ -70,7 +70,7 @@ function containEmailInUrl($url) {
 			else{
 				return $result;
 			}
-    } else { return '';}
+    } else { return null;}
 }
 
 function containEmailInWebsite($url) {
@@ -87,15 +87,20 @@ function containEmailInWebsite($url) {
     // search other pages
     else{
       $html = file_get_html($url, false, $context);
-      foreach ($html->find('a') as $link) {
-        $contactRegex = '#contact|contactez-nous|about|Contact#';
-        preg_match($contactRegex, $link->href,$result);
-        if($result != null){
-					$website = $url . '/'. $link->href ;
-          $mail = containEmailInUrl($website);
-          return $mail;
-        }
-      }
+			if(!empty($html) && $html->find('a') != null){
+				foreach ($html->find('a') as $link) {
+					$contactRegex = '#contact|contactez-nous|about|Contact#';
+					preg_match($contactRegex, $link->href,$result);
+					if($result != null){
+						$website = $url . '/'. $link->href ;
+						$mail = containEmailInUrl($website);
+						return $mail;
+					}
+					else{
+						return null;
+					}
+				}
+			}
     }
 }
 
