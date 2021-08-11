@@ -1,3 +1,11 @@
+function scrapEmailWithAPI(url) {
+  // Call the Numbers API for random math fact
+  var response = UrlFetchApp.fetch(url,
+    { 'muteHttpExceptions': true, 'validateHttpsCertificates': false}
+  );
+  return response.getContentText();
+}
+
 // scrap an email from url string
 function scrapEmail(url) {
   if(url === '' || url === undefined){
