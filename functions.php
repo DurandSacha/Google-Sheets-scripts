@@ -193,4 +193,41 @@ function checkEmail($email) {
 	return true;
 }
 
+function AdaptProtocolToUrl($url) {
+
+	// replace url with https prefix
+	$url = str_replace(['http://'] , 'https://', $url);
+	if(strpos($url, 'https://') === false){
+		$url = 'https://'.$url;
+	}
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HEADER, true);
+	curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+	curl_setopt($ch, CURLINFO_SSL_VERIFYRESULT, true);
+	curl_exec($ch);
+
+	$info = curl_getinfo($ch);
+
+	// get information ( Certificats SSL is accept ? )
+	if(strpos(json_encode($info), 'Accept') != false){
+		$protocol = 'https';
+	}
+	else{
+		$protocol = 'http';
+	}
+
+	$simpleDomain = str_replace(['https://', 'http://'] , '', $url);
+	$url = strtolower($protocol) . '://' . $simpleDomain;
+
+	curl_close($ch);
+
+	return $url;
+
+}
+
 ?>
